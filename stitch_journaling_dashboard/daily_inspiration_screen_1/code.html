@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Epilogue%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #13a4ec;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    .toggle-checkbox:checked {
+      @apply: bg-blue-600;
+      right: 0;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      @apply: bg-blue-600;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden" style='font-family: Epilogue, "Noto Sans", sans-serif;'>
+<div class="flex-grow">
+<header class="flex items-center p-4 pb-2 justify-between">
+<button class="text-white">
+<span class="material-symbols-outlined"> arrow_back </span>
+</button>
+<h1 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-8">Daily Inspiration</h1>
+</header>
+<main class="px-4 py-6">
+<div class="rounded-2xl overflow-hidden mb-6 shadow-lg">
+<img alt="Inspirational image" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9pCRyCA2XqK8gYfNMGogKfd01qydt15-2UCNmkBqKzdi5KvUJWdIvXIFxOmNl26_SUezrlgjTkCzZrmHOtWYZyZOCapNwupSpYbpArED44OXZFOSljkC5qLA2wuDPjdoumMvzWEFVmtI7l3pvelW_JcwDeuOp_Dqo8y-DdcvFgeE-UifLaDsWcMrQDmn-z_6Gfube6MXxjfCUTRjN5oMmJJzsgtW6IkkuD04ew3a41SEoJ2FhHHg_xP1h6bHsyXYbTRObjgJH7rz1"/>
+</div>
+<blockquote class="text-center mb-4">
+<h2 class="text-white text-2xl font-bold leading-tight tracking-tight">"The only way to do great work is to love what you do."</h2>
+</blockquote>
+<p class="text-gray-400 text-base font-normal leading-relaxed text-center mb-8">
+            This quote reminds us that passion fuels excellence. When we're truly invested in our work, it becomes a source of joy and fulfillment, leading to remarkable
+            achievements.
+          </p>
+<div class="flex justify-center gap-6 mb-8">
+<button class="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl"> favorite </span>
+<span class="text-xs font-bold uppercase tracking-wider">Save</span>
+</button>
+<button class="flex flex-col items-center gap-2 text-gray-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-3xl"> share </span>
+<span class="text-xs font-bold uppercase tracking-wider">Share</span>
+</button>
+</div>
+<div class="bg-[#1c2327] rounded-xl p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white"> notifications </span>
+<h3 class="text-white font-medium">Daily Reminder</h3>
+</div>
+<div class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" id="toggle" name="toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-600 cursor-pointer" for="toggle"></label>
+</div>
+</div>
+<div class="mt-4 flex items-center justify-between">
+<p class="text-gray-400">Reminder Time</p>
+<button class="text-white font-medium bg-[#283339] px-3 py-1 rounded-md">9:00 AM</button>
+</div>
+</div>
+</main>
+</div>
+<nav class="sticky bottom-0 bg-[#1c2327] border-t border-[#283339] px-4 py-2">
+<div class="flex justify-around">
+<a class="flex flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-xs font-medium tracking-wide">AI Chat</span>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-white" href="#">
+<div class="bg-[var(--primary-color)] p-3 rounded-full">
+<span class="material-symbols-outlined"> book </span>
+</div>
+<span class="text-xs font-medium tracking-wide">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium tracking-wide">Peer Support</span>
+</a>
+<a class="flex flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs font-medium tracking-wide">Settings</span>
+</a>
+</div>
+</nav>
+</div>
+
+</body></html>

@@ -1,0 +1,139 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111813]">
+<div class="relative flex h-auto min-h-screen w-full flex-col dark justify-between group/design-root overflow-x-hidden" style="--select-button-svg: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2724px%27 height=%2724px%27 fill=%27rgb(157,185,166)%27 viewBox=%270 0 256 256%27%3e%3cpath d=%27M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z%27%3e%3c/path%3e%3c/svg%3e'); font-family: Lexend, &quot;Noto Sans&quot;, sans-serif;">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 bg-[#111813] p-4 pb-2">
+<div class="flex items-center justify-between">
+<button class="text-white flex size-10 items-center justify-center rounded-full hover:bg-white/10">
+<span class="material-symbols-outlined"> arrow_back_ios_new </span>
+</button>
+<h1 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-10">Reminders</h1>
+</div>
+</header>
+<main class="p-4 space-y-6">
+<section>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-4">Medication</h2>
+<div class="space-y-4">
+<div class="relative">
+<input class="form-input peer flex w-full resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 placeholder-transparent p-4 text-base font-normal leading-normal" placeholder="Medication Name" value=""/>
+<label class="absolute left-4 top-3.5 text-[#9db9a6] text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1.5 peer-focus:-translate-y-1 peer-focus:text-xs peer-focus:text-[#13ec5b]">
+                  Medication Name
+                </label>
+</div>
+<div class="relative">
+<input class="form-input peer flex w-full resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 placeholder-transparent p-4 text-base font-normal leading-normal" placeholder="Dosage (e.g., 20mg)" value=""/>
+<label class="absolute left-4 top-3.5 text-[#9db9a6] text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1.5 peer-focus:-translate-y-1 peer-focus:text-xs peer-focus:text-[#13ec5b]">
+                  Dosage (e.g., 20mg)
+                </label>
+</div>
+<div class="relative">
+<select class="form-select flex w-full appearance-none resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 bg-[image:--select-button-svg] p-4 text-base font-normal leading-normal">
+<option disabled="" selected="" value="">Frequency</option>
+<option value="daily">Daily</option>
+<option value="weekly">Weekly</option>
+<option value="monthly">Monthly</option>
+</select>
+</div>
+<div class="flex items-center justify-between rounded-xl border border-[#28392e] bg-[#1c271f] p-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#9db9a6]"> monitor_heart </span>
+<div class="text-white">
+<p class="text-base font-medium">Link with Mood Tracking</p>
+<p class="text-sm text-[#9db9a6]">Correlate mood with medication intake</p>
+</div>
+</div>
+<label class="relative inline-flex cursor-pointer items-center">
+<input class="peer sr-only" type="checkbox"/>
+<div class="peer h-6 w-11 rounded-full bg-[#28392e] after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-[#111813] after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#13ec5b] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#13ec5b] peer-focus:ring-offset-2 peer-focus:ring-offset-[#1c271f] rtl:peer-checked:after:-translate-x-full"></div>
+</label>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-4">Appointment</h2>
+<div class="space-y-4">
+<div class="relative">
+<input class="form-input peer flex w-full resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 placeholder-transparent p-4 text-base font-normal leading-normal" placeholder="Therapist Name" value=""/>
+<label class="absolute left-4 top-3.5 text-[#9db9a6] text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-focus:top-1.5 peer-focus:-translate-y-1 peer-focus:text-xs peer-focus:text-[#13ec5b]">
+                  Therapist Name
+                </label>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative">
+<input class="form-input peer flex w-full resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 placeholder-transparent p-4 text-base font-normal leading-normal" placeholder="Appointment Date" type="date"/>
+<label class="absolute left-4 top-1.5 -translate-y-1 text-xs text-[#9db9a6] peer-focus:text-[#13ec5b]">
+                    Appointment Date
+                  </label>
+</div>
+<div class="relative">
+<input class="form-input peer flex w-full resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 placeholder-transparent p-4 text-base font-normal leading-normal" placeholder="Appointment Time" type="time"/>
+<label class="absolute left-4 top-1.5 -translate-y-1 text-xs text-[#9db9a6] peer-focus:text-[#13ec5b]">
+                    Appointment Time
+                  </label>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] mb-4">Notifications</h2>
+<div class="relative">
+<select class="form-select flex w-full appearance-none resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#111813] focus:ring-[#13ec5b] border border-[#28392e] bg-[#1c271f] h-14 bg-[image:--select-button-svg] p-4 text-base font-normal leading-normal">
+<option disabled="" selected="" value="">Alert Time</option>
+<option value="at-time">At time of event</option>
+<option value="5-min">5 minutes before</option>
+<option value="15-min">15 minutes before</option>
+<option value="30-min">30 minutes before</option>
+<option value="1-hour">1 hour before</option>
+</select>
+</div>
+</section>
+<div class="pt-4">
+<button class="flex min-w-[84px] max-w-full w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-4 bg-[#13ec5b] text-[#111813] text-base font-bold leading-normal tracking-[0.015em] hover:bg-opacity-90 transition-opacity">
+<span class="truncate">Save Reminder</span>
+</button>
+</div>
+</main>
+</div>
+<footer class="sticky bottom-0 bg-[#1c271f] pb-safe">
+<nav class="flex justify-around border-t border-[#28392e] pt-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-[#9db9a6]" href="#">
+<span class="material-symbols-outlined text-2xl"> forum </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">AI Chat</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-[#9db9a6]" href="#">
+<span class="material-symbols-outlined text-2xl"> book </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Journal</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-[#9db9a6]" href="#">
+<span class="material-symbols-outlined text-2xl"> groups </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Peer Support</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-white" href="#">
+<div class="bg-[#13ec5b] text-[#111813] rounded-full p-2">
+<span class="material-symbols-outlined text-2xl"> settings </span>
+</div>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Settings</p>
+</a>
+</nav>
+<div class="h-5"></div>
+</footer>
+</div>
+</body></html>

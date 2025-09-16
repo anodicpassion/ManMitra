@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #f90606;
+    }
+    .pulse-shadow {
+      box-shadow: 0 0 0 0 rgba(249, 6, 6, 0.7);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(249, 6, 6, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 20px rgba(249, 6, 6, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(249, 6, 6, 0);
+      }
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #4a5568;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+    input:checked+.slider {
+      background-color: #ef4444;
+    }
+    input:focus+.slider {
+      box-shadow: 0 0 1px #ef4444;
+    }
+    input:checked+.slider:before {
+      -webkit-transform: translateX(16px);
+      -ms-transform: translateX(16px);
+      transform: translateX(16px);
+    }
+    .slider.round {
+      border-radius: 34px;
+    }
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-gray-900">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-gray-900 dark justify-between group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+<div class="flex flex-col flex-grow">
+<div class="flex items-center bg-gray-900 p-4 pb-2 justify-between">
+<button class="text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-3xl"> arrow_back </span>
+</button>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center">Panic Button</h2>
+<button class="text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-gray-800 transition-colors">
+<span class="material-symbols-outlined text-3xl"> settings </span>
+</button>
+</div>
+<div class="flex flex-col items-center justify-center flex-grow px-6 text-center">
+<div class="mb-4">
+<span class="material-symbols-outlined text-red-500 text-8xl"> sos </span>
+</div>
+<h1 class="text-white text-4xl font-bold leading-tight mb-4">In Case of Emergency</h1>
+<p class="text-gray-400 text-lg font-normal leading-normal max-w-sm">
+          Press and hold the button for 3 seconds to immediately alert your emergency contacts and connect to a crisis helpline.
+        </p>
+</div>
+<div class="flex flex-col items-center justify-center p-8 flex-grow">
+<button class="flex items-center justify-center w-64 h-64 rounded-full bg-red-600 text-white text-3xl font-bold leading-normal tracking-[0.015em] transition-transform duration-200 ease-in-out active:scale-95 pulse-shadow">
+<span class="truncate">PANIC</span>
+</button>
+</div>
+<div class="bg-gray-800 rounded-t-3xl p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-white text-xl font-bold">Panic Button Settings</h3>
+<button class="text-gray-400 hover:text-white">
+<span class="material-symbols-outlined"> close </span>
+</button>
+</div>
+<div class="space-y-6">
+<div class="flex items-center justify-between">
+<span class="text-white font-medium">Silent Alert</span>
+<label class="switch">
+<input checked="" type="checkbox"/>
+<span class="slider round"></span>
+</label>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-white font-medium">Countdown</span>
+<div class="flex items-center gap-2">
+<span class="text-gray-400">3 seconds</span>
+<button class="text-white hover:text-gray-300">
+<span class="material-symbols-outlined"> chevron_right </span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-white font-medium">Personalized Message</span>
+<button class="text-white hover:text-gray-300">
+<span class="material-symbols-outlined"> chevron_right </span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div class="flex gap-2 border-t border-gray-800 bg-gray-900 px-4 pb-3 pt-2">
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 rounded-full text-red-500" href="#">
+<div class="flex h-8 w-16 items-center justify-center rounded-full bg-red-500/20">
+<span class="material-symbols-outlined text-red-500"> crisis_alert </span>
+</div>
+<p class="text-red-500 text-xs font-medium leading-normal tracking-[0.015em]">Panic</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl"> book_4 </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Learn</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl"> group </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Connect</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl"> edit_note </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Journal</p>
+</a>
+<a class="just flex flex-1 flex-col items-center justify-end gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-2xl"> person </span>
+<p class="text-xs font-medium leading-normal tracking-[0.015em]">Profile</p>
+</a>
+</div>
+<div class="h-5 bg-gray-900"></div>
+</div>
+</div>
+
+</body></html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Voice Journal Privacy</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend:wght@400;500;600;700&amp;family=Noto+Sans:wght@400;500;700;900" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #1380ec;
+      --background-color: #0F1216;
+      --text-primary: #FFFFFF;
+      --text-secondary: #9DAAB9;
+      --card-background: #1A1F25;
+      --card-border: #3B4754;
+    }
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-primary);
+    }
+    .checked\:bg-\[var\(--primary-color\)\]:checked {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    .checked\:border-\[var\(--primary-color\)\]:checked {
+        border-color: var(--primary-color);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-color">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div>
+<header class="flex items-center p-4">
+<button class="text-white">
+<span class="material-symbols-outlined text-3xl">
+            arrow_back_ios_new
+          </span>
+</button>
+<h1 class="flex-1 text-center text-xl font-bold tracking-tight pr-8">Voice Journal Privacy</h1>
+</header>
+<main class="p-4">
+<h2 class="text-2xl font-bold tracking-tight mb-6">Who can access your voice journal entries?</h2>
+<div class="space-y-4">
+<label class="flex items-center gap-4 rounded-xl border border-card-border bg-card-background p-4 cursor-pointer transition-all duration-200 has-[:checked]:border-primary-color has-[:checked]:ring-2 has-[:checked]:ring-primary-color/50">
+<div class="flex-grow">
+<p class="text-base font-semibold">AI Analysis Only</p>
+<p class="text-sm text-text-secondary">Your entries are processed by AI for insights but remain inaccessible to humans.</p>
+</div>
+<input checked="" class="h-6 w-6 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="privacy_option" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-card-border bg-card-background p-4 cursor-pointer transition-all duration-200 has-[:checked]:border-primary-color has-[:checked]:ring-2 has-[:checked]:ring-primary-color/50">
+<div class="flex-grow">
+<p class="text-base font-semibold">Personal View Only</p>
+<p class="text-sm text-text-secondary">You are the sole person who can listen to your voice journal entries.</p>
+</div>
+<input class="h-6 w-6 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="privacy_option" type="radio"/>
+</label>
+<label class="flex items-center gap-4 rounded-xl border border-card-border bg-card-background p-4 cursor-pointer transition-all duration-200 has-[:checked]:border-primary-color has-[:checked]:ring-2 has-[:checked]:ring-primary-color/50">
+<div class="flex-grow">
+<p class="text-base font-semibold">Trusted Contacts (Emergency)</p>
+<p class="text-sm text-text-secondary">Designated contacts can access your entries in case of an emergency.</p>
+</div>
+<input class="h-6 w-6 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="privacy_option" type="radio"/>
+</label>
+</div>
+<div class="mt-8">
+<h2 class="text-2xl font-bold tracking-tight mb-4">Data Retention</h2>
+<div class="rounded-xl border border-card-border bg-card-background p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-color/10 text-primary-color">
+<span class="material-symbols-outlined text-3xl">
+                    auto_delete
+                  </span>
+</div>
+<div>
+<p class="font-semibold text-base">Auto-delete recordings</p>
+<p class="text-sm text-text-secondary mt-1">Automatically delete entries after a set period.</p>
+</div>
+</div>
+<div class="relative">
+<input class="peer h-6 w-11 cursor-pointer appearance-none rounded-full bg-card-border transition-colors checked:bg-primary-color focus:outline-none" id="toggle" type="checkbox"/>
+<span class="pointer-events-none absolute left-1 top-1 block h-4 w-4 rounded-full bg-white transition-all peer-checked:left-6"></span>
+</div>
+</div>
+<div class="mt-4 space-y-3 pt-4 border-t border-card-border">
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-base">After 30 days</span>
+<input class="h-5 w-5 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="retention_period" type="radio"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-base">After 90 days</span>
+<input checked="" class="h-5 w-5 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="retention_period" type="radio"/>
+</label>
+<label class="flex items-center justify-between cursor-pointer">
+<span class="text-base">Never</span>
+<input class="h-5 w-5 shrink-0 appearance-none rounded-full border-2 border-card-border bg-transparent checked:bg-primary-color checked:border-primary-color focus:outline-none focus:ring-0 focus:ring-offset-0 transition-colors" name="retention_period" type="radio"/>
+</label>
+</div>
+</div>
+</div>
+<div class="mt-8">
+<h2 class="text-2xl font-bold tracking-tight mb-4">Encryption</h2>
+<div class="flex items-start gap-4 rounded-xl bg-card-background p-4">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary-color/10 text-primary-color">
+<span class="material-symbols-outlined text-3xl">
+                shield_lock
+              </span>
+</div>
+<div>
+<p class="font-semibold text-base">End-to-end encryption</p>
+<p class="text-sm text-text-secondary mt-1">
+                Your voice journal entries are protected with end-to-end encryption, ensuring only authorized parties can access them.
+              </p>
+</div>
+</div>
+</div>
+</main>
+</div>
+<footer class="sticky bottom-0 bg-background-color/80 backdrop-blur-sm p-4 mt-8">
+<button class="w-full rounded-xl bg-primary-color py-4 text-base font-bold text-white transition-opacity hover:opacity-90">
+        Save Settings
+      </button>
+</footer>
+</div>
+
+</body></html>

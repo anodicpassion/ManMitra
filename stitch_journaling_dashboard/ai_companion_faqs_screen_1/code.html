@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #13a4ec;
+    }
+    .group .summary-arrow {
+      transition: transform 0.3s ease-out;
+    }
+    .group[open] .summary-arrow {
+      transform: rotate(180deg);
+    }
+    .group summary::-webkit-details-marker {
+      display: none;
+    }
+    .group summary:focus {
+      outline: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between group/design-root overflow-x-hidden text-white" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="flex flex-col">
+<header class="flex items-center justify-between p-4 bg-[#111618] sticky top-0 z-10">
+<button class="p-2">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<h1 class="text-xl font-bold">FAQs</h1>
+<div class="w-8"></div>
+</header>
+<main class="flex flex-col p-4">
+<h2 class="text-2xl font-bold tracking-tight mb-4">AI Companion</h2>
+<div class="relative mb-6">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+<input class="w-full rounded-full bg-[#1C2327] py-3 pl-10 pr-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]" placeholder="Search FAQs..." type="text"/>
+</div>
+<div class="space-y-4">
+<details class="group rounded-xl bg-[#1C2327] border border-transparent hover:border-gray-700 transition-all duration-300" open="">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-4">
+<span class="text-base font-semibold">How does the AI companion adapt to my personality?</span>
+<span class="material-symbols-outlined summary-arrow">expand_more</span>
+</summary>
+<div class="px-4 pb-4">
+<p class="text-gray-400">
+                The AI companion learns from your interactions, adjusting its communication style and responses to better match your preferences and personality over time.
+              </p>
+</div>
+</details>
+<details class="group rounded-xl bg-[#1C2327] border border-transparent hover:border-gray-700 transition-all duration-300">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-4">
+<span class="text-base font-semibold">What is sentiment analysis and how does it work?</span>
+<span class="material-symbols-outlined summary-arrow">expand_more</span>
+</summary>
+<div class="px-4 pb-4">
+<p class="text-gray-400">
+                Sentiment analysis allows the AI to understand the emotional tone behind your words. It analyzes your text to identify feelings like joy, sadness, or frustration, helping it to respond with more empathy and support.
+              </p>
+</div>
+</details>
+<details class="group rounded-xl bg-[#1C2327] border border-transparent hover:border-gray-700 transition-all duration-300">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-4">
+<span class="text-base font-semibold">How are the AI's responses generated?</span>
+<span class="material-symbols-outlined summary-arrow">expand_more</span>
+</summary>
+<div class="px-4 pb-4">
+<p class="text-gray-400">
+                Our AI uses a large language model trained on a vast and diverse dataset of text. This allows it to generate human-like, relevant, and supportive responses to your thoughts and feelings.
+              </p>
+</div>
+</details>
+<details class="group rounded-xl bg-[#1C2327] border border-transparent hover:border-gray-700 transition-all duration-300">
+<summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-4">
+<span class="text-base font-semibold">What are the ethical considerations for using the AI companion?</span>
+<span class="material-symbols-outlined summary-arrow">expand_more</span>
+</summary>
+<div class="px-4 pb-4">
+<p class="text-gray-400">
+                We prioritize your privacy and data security. All conversations are encrypted and anonymized. Our AI is designed to be a supportive tool, not a replacement for professional help. We have strict guidelines to prevent harmful or biased responses.
+              </p>
+</div>
+</details>
+</div>
+</main>
+</div>
+<footer class="sticky bottom-0 bg-[#1c2327] border-t border-[#283339]">
+<nav class="flex justify-around items-center h-20">
+<a class="flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="text-xs font-medium">AI Chat</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="text-xs font-medium">Journal</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-gray-400 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-xs font-medium">Peer Support</span>
+</a>
+<a class="flex flex-col items-center justify-center gap-1 text-white bg-[var(--primary-color)] h-12 w-12 rounded-full" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-xs font-medium sr-only">Settings</span>
+</a>
+</nav>
+<div class="bg-[#1c2327] h-safe-area-bottom"></div>
+</footer>
+</div>
+
+</body></html>

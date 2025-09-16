@@ -1,0 +1,140 @@
+<html><head>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-500: #13ec5b;
+        --neutral-900: #111813;
+        --neutral-800: #1c271f;
+        --neutral-700: #28392e;
+        --neutral-600: #3b5443;
+        --neutral-400: #9db9a6;
+        --neutral-50: #ffffff;
+      }
+      .custom-radio:checked + label {
+        border-color: var(--primary-500);
+        background-color: rgba(19, 236, 91, 0.1);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[var(--neutral-900)]" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden">
+<div class="flex-grow">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-[var(--neutral-900)] p-4">
+<button class="flex size-10 items-center justify-center rounded-full text-[var(--neutral-50)]">
+<span class="material-symbols-outlined"> arrow_back_ios_new </span>
+</button>
+<h1 class="flex-1 text-center text-lg font-bold text-[var(--neutral-50)]">Content Moderation</h1>
+<div class="w-10"></div>
+</header>
+<main class="p-4">
+<section class="mb-8">
+<h2 class="mb-4 text-xl font-bold text-[var(--neutral-50)]">Moderation Preferences</h2>
+<div class="flex flex-col space-y-3">
+<div class="relative">
+<input checked="" class="custom-radio invisible absolute" id="strict" name="moderation" type="radio"/>
+<label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--neutral-600)] bg-[var(--neutral-800)] p-4 text-[var(--neutral-50)] transition-all" for="strict">
+<div>
+<h3 class="font-semibold">Strict</h3>
+<p class="text-sm text-[var(--neutral-400)]">Filters most potentially sensitive content.</p>
+</div>
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-[var(--neutral-600)]">
+<div class="size-3 rounded-full bg-transparent group-[:checked]:bg-[var(--primary-500)]"></div>
+</div>
+</label>
+</div>
+<div class="relative">
+<input class="custom-radio invisible absolute" id="moderate" name="moderation" type="radio"/>
+<label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--neutral-600)] bg-[var(--neutral-800)] p-4 text-[var(--neutral-50)] transition-all" for="moderate">
+<div>
+<h3 class="font-semibold">Moderate</h3>
+<p class="text-sm text-[var(--neutral-400)]">Balances filtering with content visibility.</p>
+</div>
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-[var(--neutral-600)]">
+<div class="size-3 rounded-full bg-transparent"></div>
+</div>
+</label>
+</div>
+<div class="relative">
+<input class="custom-radio invisible absolute" id="relaxed" name="moderation" type="radio"/>
+<label class="flex cursor-pointer items-center justify-between rounded-xl border border-[var(--neutral-600)] bg-[var(--neutral-800)] p-4 text-[var(--neutral-50)] transition-all" for="relaxed">
+<div>
+<h3 class="font-semibold">Relaxed</h3>
+<p class="text-sm text-[var(--neutral-400)]">Minimal filtering, shows most content.</p>
+</div>
+<div class="flex size-6 items-center justify-center rounded-full border-2 border-[var(--neutral-600)]">
+<div class="size-3 rounded-full bg-transparent"></div>
+</div>
+</label>
+</div>
+</div>
+</section>
+<section class="mb-8">
+<h2 class="mb-4 text-xl font-bold text-[var(--neutral-50)]">Trigger Warnings</h2>
+<div class="flex items-center justify-between rounded-xl bg-[var(--neutral-800)] p-4">
+<label class="font-semibold text-[var(--neutral-50)]" for="trigger-warnings">Enable Trigger Warnings</label>
+<label class="relative inline-flex cursor-pointer items-center">
+<input checked="" class="peer sr-only" id="trigger-warnings" type="checkbox" value=""/>
+<div class="peer h-6 w-11 rounded-full bg-[var(--neutral-600)] after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-[var(--neutral-500)] after:bg-[var(--neutral-50)] after:transition-all after:content-[''] peer-checked:bg-[var(--primary-500)] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 dark:peer-focus:ring-green-800"></div>
+</label>
+</div>
+</section>
+<section>
+<h2 class="mb-4 text-xl font-bold text-[var(--neutral-50)]">Transparency</h2>
+<div class="space-y-4 rounded-xl bg-[var(--neutral-800)] p-4">
+<p class="text-sm text-[var(--neutral-400)]">
+                Our AI moderation system is designed to ensure a safe and supportive environment. It filters harmful content while respecting user privacy. Your preferences help us
+                tailor the moderation to your comfort level.
+              </p>
+<a class="inline-block text-sm font-semibold text-[var(--primary-500)] hover:underline" href="#">Learn more about our AI</a>
+<a class="flex items-center justify-between rounded-lg bg-[var(--neutral-700)] p-3 text-left" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[var(--neutral-50)]">history</span>
+<span class="font-semibold text-[var(--neutral-50)]">Moderation Log</span>
+</div>
+<span class="material-symbols-outlined text-[var(--neutral-400)]">arrow_forward_ios</span>
+</a>
+</div>
+</section>
+</main>
+</div>
+<footer class="sticky bottom-0">
+<div class="px-4 py-3">
+<button class="w-full cursor-pointer rounded-xl bg-[var(--primary-500)] py-3 text-center text-base font-bold text-[var(--neutral-900)]">Save Preferences</button>
+</div>
+<nav class="flex justify-around border-t border-[var(--neutral-700)] bg-[var(--neutral-800)] px-4 pb-3 pt-2">
+<a class="flex flex-1 flex-col items-center gap-1 text-[var(--neutral-400)]" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<p class="text-xs">AI Chat</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-[var(--neutral-400)]" href="#">
+<span class="material-symbols-outlined">book</span>
+<p class="text-xs">Journal</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-[var(--primary-500)]" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-xs font-semibold">Peer Support</p>
+</a>
+<a class="flex flex-1 flex-col items-center gap-1 text-[var(--neutral-400)]" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-xs">Settings</p>
+</a>
+</nav>
+</footer>
+</div>
+</body></html>

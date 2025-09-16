@@ -1,0 +1,108 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #13a4ec;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between group/design-root overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="flex-grow">
+<header class="flex items-center p-4">
+<button class="text-white">
+<span class="material-symbols-outlined">arrow_back_ios_new</span>
+</button>
+<h1 class="flex-1 text-center text-xl font-bold text-white">Feedback</h1>
+<div class="w-10"></div>
+</header>
+<main class="px-4">
+<section class="mt-6">
+<h2 class="text-lg font-semibold text-white">How can we improve?</h2>
+<textarea class="mt-3 w-full resize-none rounded-xl border border-transparent bg-[#283339] p-4 text-base text-white placeholder:text-[#9db0b9] focus:border-[var(--primary-color)] focus:ring-0" placeholder="Describe your experience or suggestion..." rows="5"></textarea>
+</section>
+<section class="mt-8">
+<h2 class="text-lg font-semibold text-white">What is this about?</h2>
+<div class="mt-3 flex flex-wrap gap-3">
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="feedback_type" type="radio"/>
+<span class="block rounded-full border border-[#3b4b54] px-4 py-2 text-sm text-white peer-checked:border-[var(--primary-color)] peer-checked:bg-[var(--primary-color)] peer-checked:text-white">Suggestion</span>
+</label>
+<label class="relative cursor-pointer">
+<input class="peer sr-only" name="feedback_type" type="radio"/>
+<span class="block rounded-full border border-[#3b4b54] px-4 py-2 text-sm text-white peer-checked:border-[var(--primary-color)] peer-checked:bg-[var(--primary-color)] peer-checked:text-white">Bug Report</span>
+</label>
+<label class="relative cursor-pointer">
+<input checked="" class="peer sr-only" name="feedback_type" type="radio"/>
+<span class="block rounded-full border border-[#3b4b54] px-4 py-2 text-sm text-white peer-checked:border-[var(--primary-color)] peer-checked:bg-[var(--primary-color)] peer-checked:text-white">General Feedback</span>
+</label>
+</div>
+</section>
+<section class="mt-8">
+<h2 class="text-lg font-semibold text-white">Attachments</h2>
+<p class="mt-1 text-sm text-[#9db0b9]">Add screenshots or files to provide more context.</p>
+<div class="mt-3 flex items-center justify-center rounded-xl border-2 border-dashed border-[#3b4b54] bg-[#283339] px-6 py-10">
+<div class="text-center">
+<span class="material-symbols-outlined mx-auto text-4xl text-[#9db0b9]">cloud_upload</span>
+<div class="mt-2 flex text-sm text-white">
+<label class="relative cursor-pointer rounded-md font-semibold text-[var(--primary-color)] focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--primary-color)] focus-within:ring-offset-2 focus-within:ring-offset-gray-800 hover:text-[var(--primary-color)]/80" for="file-upload">
+<span>Upload a file</span>
+<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+</label>
+<p class="pl-1">or drag and drop</p>
+</div>
+<p class="text-xs text-[#9db0b9]">PNG, JPG, GIF up to 10MB</p>
+</div>
+</div>
+</section>
+<section class="mt-8">
+<h2 class="text-lg font-semibold text-white">Contact Information</h2>
+<p class="mt-1 text-sm text-[#9db0b9]">This is optional, but it helps us follow up.</p>
+<input class="mt-3 w-full rounded-xl border border-transparent bg-[#283339] p-4 text-base text-white placeholder:text-[#9db0b9] focus:border-[var(--primary-color)] focus:ring-0" placeholder="Your email address" type="email"/>
+</section>
+</main>
+</div>
+<div class="sticky bottom-0">
+<div class="px-4 py-3">
+<button class="flex h-12 w-full cursor-pointer items-center justify-center rounded-xl bg-[var(--primary-color)] px-4 text-base font-bold text-white shadow-lg shadow-[var(--primary-color)]/20">
+            Submit Feedback
+          </button>
+</div>
+<nav class="flex justify-around border-t border-[#283339] bg-[#1c2327] pb-3 pt-2">
+<a class="flex flex-col items-center gap-1 text-[#9db0b9]" href="#">
+<span class="material-symbols-outlined text-2xl">chat_bubble</span>
+<span class="text-xs font-medium">AI Chat</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#9db0b9]" href="#">
+<span class="material-symbols-outlined text-2xl">auto_stories</span>
+<span class="text-xs font-medium">Journal</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[#9db0b9]" href="#">
+<span class="material-symbols-outlined text-2xl">group</span>
+<span class="text-xs font-medium">Community</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="text-xs font-medium">Settings</span>
+</a>
+</nav>
+<div class="h-safe-area-bottom bg-[#1c2327]"></div>
+</div>
+</div>
+</body></html>
