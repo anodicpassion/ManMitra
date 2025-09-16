@@ -1,4 +1,4 @@
-```
+
 # MannMitra: Your Confidential AI Wellness Companion 🫂
 
 MannMitra is a culturally aware, AI-powered platform designed to provide empathetic, stigma-free, and confidential mental wellness support to Indian youth. Leveraging Google Cloud's Generative AI, MannMitra bridges the gap between casual self-help and professional care, offering a safe space for young individuals to navigate mental health challenges.
@@ -30,4 +30,4 @@ This project is built using the Google Cloud ecosystem for a scalable and robust
 ## **License**
 
 This project is licensed under the **Apache License 2.0**. For more details, see the `LICENSE` file.
-```
+
