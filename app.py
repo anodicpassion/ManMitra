@@ -1,19 +1,89 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response
+import google.generativeai as genai
 import os
-import glob
-import random
 import json
-import csv
-from datetime import date
+import logging
+from flask import Flask, request, jsonify, render_template, redirect, url_for, send_from_directory
+from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import datetime
+import random
 
+# --- Configuration ---
+load_dotenv()
+logging.basicConfig(level=logging.INFO)
+
+# Configure the Gemini API
+try:
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+except Exception as e:
+    logging.error(f"🚨 Error configuring Gemini API: {e}")
+    exit()
+
+# --- AI Model and Prompts ---
+# Use a powerful model for nuanced conversation and analysis
+model = genai.GenerativeModel('gemini-2.5-flash')
+
+# 1. THE THERAPIST PERSONA PROMPT
+# This prompt defines the bot's personality and conversational style.
+SYSTEM_PROMPT_THERAPIST = """
+You are "Kai," a compassionate and empathetic AI mental health companion. Your identity is NOT that of a licensed therapist, but a supportive friend.
+Your goal is to create a safe, non-judgmental space for the user to express themselves.
+Your tone should be warm, understanding, and human-like. Use contractions (e.g., "you're," "it's") and a conversational style, like you're chatting on WhatsApp.
+NEVER say you are an AI or a bot. You are Kai.
+NEVER give medical advice. If the user mentions serious issues like self-harm, gently guide them toward professional help by saying something like, "It sounds like you're going through a lot. For serious thoughts like these, talking to a professional can be really helpful. You can connect with people who can support you by calling or texting 988 in the US and Canada, or 111 in the UK, anytime."
+
+To understand the user better, naturally weave in creative and gentle questions. Use techniques like:
+- Metaphors: "If this week was a weather forecast, what would it look like?"
+- Open-ended prompts: "What's been on your mind the most today?"
+- Gentle probes: "That sounds really tough. How have you been coping with that feeling?"
+- Perspective shifts: "Imagine your best friend felt this way. What would you tell them?"
+- Gamified check-ins: "On a scale from a sleepy turtle 🐢 to a buzzing bee 🐝, how's your energy today?"
+
+Your primary goal is to listen, validate their feelings, and encourage reflection. Keep your responses concise and focused on the user.
+"""
+
+# 2. THE METRICS ANALYZER PROMPT
+# This prompt instructs the AI to act as an analyzer and return ONLY JSON.
+SYSTEM_PROMPT_ANALYZER = """
+You are an expert psychological analyst AI. Your task is to analyze a conversation transcript and extract specific metrics.
+Analyze the user's messages ONLY. Do not analyze the assistant's messages.
+Based on the full conversation provided, return a SINGLE JSON object that assesses the following metrics.
+Provide a 'value' for each metric and a brief 'justification' citing evidence from the user's text.
+If there is not enough information for a metric, set its value to 'N/A'.
+
+The JSON object must have this exact structure:
+{
+  "progress_engagement": {
+    "sentiment_trend": {"value": "getting better|worse|stable|N/A", "justification": ""},
+    "emotional_variability": {"value": "stable|fluctuating|N/A", "justification": ""},
+    "goal_mentions": {"value": "present|absent", "justification": ""}
+  },
+  "risk_safety": {
+    "self_harm_ideation": {"value": "high|medium|low|none", "justification": ""},
+    "hopelessness": {"value": "high|medium|low|none", "justification": ""}
+  },
+  "well_being_indicators": {
+    "sleep_quality": {"value": "good|poor|mentioned|N/A", "justification": ""},
+    "energy_levels": {"value": "high|low|mentioned|N/A", "justification": ""},
+    "social_connection": {"value": "connected|isolated|mentioned|N/A", "justification": ""}
+  },
+  "linguistic_metrics": {
+    "sentiment_polarity": {"value": "positive|negative|neutral|mixed", "justification": ""},
+    "dominant_emotion": {"value": "sadness|anxiety|anger|joy|N/A", "justification": ""},
+    "self_focused_language": {"value": "high|medium|low", "justification": ""},
+    "absolutist_words": {"value": "present|absent", "justification": ""}
+  }
+}
+"""
+
+# --- Flask Application ---
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret-key-change-this-in-production'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'your_secret_key'  # Change this in production
 app.config['UPLOAD_FOLDER'] = 'static/avatars'
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -22,35 +92,37 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 
-class User(UserMixin, db.Model):
+# Models
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    avatar = db.Column(db.String(200), default='default.png')
-    preferences = db.Column(db.Text, default='{}')  # JSON string for settings
+    password_hash = db.Column(db.String(120), nullable=False)
+    avatar = db.Column(db.String(120), default='default_avatar.png')
+    preferences = db.Column(db.Text)  # JSON string for preferences
+    metrics = db.Column(db.Text)  # JSON string for latest metrics
+
+
+class MoodLog(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    date = db.Column(db.Date, default=datetime.date.today)
+    mood_score = db.Column(db.Integer)  # 1-10
+    note = db.Column(db.Text)
 
 
 class Story(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    body = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    title = db.Column(db.String(200))
+    body = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     anonymous = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 
-class ChatMessage(db.Model):
+class ChatHistory(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    is_user = db.Column(db.Boolean, default=True)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-class Mood(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    date = db.Column(db.Date, default=date.today)
-    mood = db.Column(db.Integer, nullable=False)  # 1-5 scale
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    history = db.Column(db.Text)  # JSON list
 
 
 @login_manager.user_loader
@@ -58,278 +130,229 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 
-# Get all HTML files from the stitch_journaling_dashboard directory
-def get_html_files():
-    html_files = []
-    dashboard_path = os.path.join(os.path.dirname(__file__), 'stitch_journaling_dashboard')
-
-    # Find all code.html files recursively
-    for root, dirs, files in os.walk(dashboard_path):
-        for file in files:
-            if file == 'code.html':
-                # Get the relative path from dashboard directory
-                rel_path = os.path.relpath(root, dashboard_path)
-                # Create a route name from the directory name
-                route_name = rel_path.replace('/', '_').replace(' ', '_').replace('(', '').replace(')', '').replace('&',
-                                                                                                                    'and').replace(
-                    '-', '_').lower()
-                html_files.append({
-                    'route_name': route_name,
-                    'file_path': os.path.join(root, file),
-                    'display_name': rel_path.replace('_', ' ').title()
-                })
-
-    return html_files
+with app.app_context():
+    db.create_all()
 
 
-# Get all HTML files
-html_files = get_html_files()
+def get_chat_response(conversation_history):
+    """Generates the therapist's conversational reply."""
+    try:
+        prompt = SYSTEM_PROMPT_THERAPIST + "\n\nConversation History:\n" + conversation_history
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        logging.error(f"Error in get_chat_response: {e}")
+        return "I'm having a little trouble connecting right now. Let's try again in a moment."
 
 
-@app.route('/')
-def index():
-    """Home page with navigation to all screens"""
-    if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    return render_template('index.html', screens=html_files)
+def analyze_conversation(conversation_history):
+    """Analyzes the conversation and extracts metrics as JSON."""
+    try:
+        prompt = SYSTEM_PROMPT_ANALYZER + "\n\nConversation Transcript:\n" + conversation_history
+        response = model.generate_content(prompt)
+
+        # Clean the response to ensure it's valid JSON
+        cleaned_text = response.text.strip().replace('```json', '').replace('```', '')
+        return json.loads(cleaned_text)
+    except Exception as e:
+        logging.error(f"Error parsing metrics JSON: {e}")
+        return {"error": "Failed to analyze metrics."}
 
 
-@app.route('/dashboard')
-@login_required
-def dashboard():
-    """Main journaling dashboard"""
-    greeting = f"Hello, {current_user.username}! How are you feeling today?"
-
-    # Mood summary progress
-    moods = Mood.query.filter_by(user_id=current_user.id).order_by(Mood.date.desc()).limit(7).all()
-    mood_summary = [m.mood for m in moods]
-    dates = [m.date.strftime('%Y-%m-%d') for m in moods]
-    chart = "Mood Progress (last 7 days):\n" + "\n".join([f"{d}: {m}" for d, m in zip(dates, mood_summary)])
-
-    # Daily tips and motivational quote
-    tips = ["Stay hydrated!", "Take a short walk.", "Practice deep breathing.", "Journal your thoughts."]
-    quotes = ["You are stronger than you think.", "Every day is a new beginning.", "Believe in yourself."]
-    daily_tip = random.choice(tips)
-    motivational_quote = random.choice(quotes)
-
-    return render_template('stitch_journaling_dashboard/journaling_dashboard_4/code.html',
-                           greeting=greeting, chart=chart, daily_tip=daily_tip, quote=motivational_quote)
-
-
-@app.route('/checkin', methods=['POST'])
-@login_required
-def checkin():
-    """Handle daily check-in mood submission"""
-    mood = int(request.form.get('mood', 3))  # Default to 3 if not provided
-    today = date.today()
-    existing = Mood.query.filter_by(user_id=current_user.id, date=today).first()
-    if existing:
-        existing.mood = mood
-    else:
-        new_mood = Mood(user_id=current_user.id, mood=mood)
-        db.session.add(new_mood)
-    db.session.commit()
-    return redirect(url_for('dashboard'))
-
-
+# Routes
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """Login/signup screen"""
     if request.method == 'POST':
-        action = request.form.get('action')
-        username = request.form.get('username')
-        password = request.form.get('password')
-
-        if action == 'signup':
-            if User.query.filter_by(username=username).first():
-                # Username taken, handle error in template
-                return render_template('stitch_journaling_dashboard/login/signup_screen_1/code.html',
-                                       error="Username taken")
-            hashed_pw = generate_password_hash(password)
-            new_user = User(username=username, password=hashed_pw)
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user)
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password_hash, password):
+            login_user(user)
             return redirect(url_for('dashboard'))
+        else:
+            return render_template('login.html', error='Invalid credentials')
+    return render_template('login.html')
 
-        elif action == 'login':
-            user = User.query.filter_by(username=username).first()
-            if user and check_password_hash(user.password, password):
-                login_user(user)
-                return redirect(url_for('dashboard'))
-            else:
-                return render_template('stitch_journaling_dashboard/login/signup_screen_1/code.html',
-                                       error="Invalid credentials")
 
-    return render_template('stitch_journaling_dashboard/login/signup_screen_1/code.html')
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if User.query.filter_by(username=username).first():
+            return render_template('register.html', error='Username taken')
+        hashed = generate_password_hash(password)
+        user = User(username=username, password_hash=hashed)
+        db.session.add(user)
+        db.session.commit()
+        chat = ChatHistory(user_id=user.id, history=json.dumps([]))
+        db.session.add(chat)
+        db.session.commit()
+        login_user(user)
+        return redirect(url_for('dashboard'))
+    return render_template('register.html')
 
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('login'))
 
 
-@app.route('/ai-chat', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 @login_required
-def ai_chat():
-    """AI companion chat"""
-    if request.method == 'POST':
-        message = request.form.get('message')
-        if message:
-            user_msg = ChatMessage(user_id=current_user.id, message=message, is_user=True)
-            db.session.add(user_msg)
-            # Simple mock AI response
-            responses = ["I understand. Tell me more.", "That's interesting. How does that make you feel?",
-                         "Remember to be kind to yourself."]
-            ai_response = random.choice(responses)
-            ai_msg = ChatMessage(user_id=current_user.id, message=ai_response, is_user=False)
-            db.session.add(ai_msg)
-            db.session.commit()
+def dashboard():
+    hour = datetime.datetime.now().hour
+    if hour < 12:
+        greeting = "Good morning"
+    elif hour < 18:
+        greeting = "Good afternoon"
+    else:
+        greeting = "Good evening"
+    today = datetime.date.today()
+    mood_today = MoodLog.query.filter_by(user_id=current_user.id, date=today).first()
+    moods = MoodLog.query.filter(MoodLog.user_id == current_user.id,
+                                 MoodLog.date >= today - datetime.timedelta(days=7)).order_by(MoodLog.date).all()
+    mood_list = [(m.date.strftime('%Y-%m-%d'), m.mood_score) for m in moods]
+    tips = ["Take a deep breath", "Drink water", "Go for a walk"]
+    tip = random.choice(tips)
+    quotes = ["You are stronger than you think", "This too shall pass"]
+    quote = random.choice(quotes)
+    return render_template('dashboard.html', greeting=greeting, mood_today=mood_today, mood_list=mood_list, tip=tip,
+                           quote=quote)
 
-    history = ChatMessage.query.filter_by(user_id=current_user.id).order_by(ChatMessage.timestamp).all()
-    return render_template('stitch_journaling_dashboard/ai_companion_chat_screen_1/code.html', history=history)
 
-
-@app.route('/peer-support', methods=['GET', 'POST'])
+@app.route('/checkin', methods=['POST'])
 @login_required
-def peer_support():
-    """Peer support forum"""
-    if request.method == 'POST':
-        title = request.form.get('title')
-        body = request.form.get('body')
-        anonymous = request.form.get('anonymous') == 'on'
-        new_story = Story(title=title, body=body, user_id=current_user.id, anonymous=anonymous)
-        db.session.add(new_story)
-        db.session.commit()
+def checkin():
+    mood_score = int(request.form['mood'])
+    note = request.form.get('note', '')
+    today = datetime.date.today()
+    existing = MoodLog.query.filter_by(user_id=current_user.id, date=today).first()
+    if existing:
+        existing.mood_score = mood_score
+        existing.note = note
+    else:
+        mood = MoodLog(user_id=current_user.id, date=today, mood_score=mood_score, note=note)
+        db.session.add(mood)
+    db.session.commit()
+    return redirect(url_for('dashboard'))
 
-    stories = Story.query.order_by(Story.id.desc()).all()
-    story_data = []
-    for story in stories:
-        author = "Anonymous" if story.anonymous else (
-            User.query.get(story.user_id).username if story.user_id else "Anonymous")
-        story_data.append({'title': story.title, 'body': story.body, 'author': author})
 
+@app.route('/chat_page')
+@login_required
+def chat_page():
+    chat = ChatHistory.query.filter_by(user_id=current_user.id).first()
+    history = json.loads(chat.history) if chat else []
+    return render_template('chat.html', history=history)
+
+
+@app.route('/chat', methods=['POST'])
+@login_required
+def chat():
+    data = request.json
+    user_message = data.get('message')
+    chat = ChatHistory.query.filter_by(user_id=current_user.id).first()
+    history = json.loads(chat.history) if chat else []
+    history.append({"role": "user", "parts": [user_message]})
+    conversation_str = "\n".join([f"{msg['role'].title()}: {msg['parts'][0]}" for msg in history])
+    therapist_reply = get_chat_response(conversation_str)
+    history.append({"role": "model", "parts": [therapist_reply]})
+    chat.history = json.dumps(history)
+    db.session.commit()
+    metrics = analyze_conversation(conversation_str)
+    current_user.metrics = json.dumps(metrics)
+    db.session.commit()
+    return jsonify({
+        "reply": therapist_reply,
+        "metrics": metrics,
+        "history": history
+    })
+
+
+@app.route('/community')
+@login_required
+def community():
+    stories = Story.query.order_by(Story.created_at.desc()).all()
+    story_list = []
+    for s in stories:
+        if s.anonymous or not s.user_id:
+            author = "Anonymous"
+        else:
+            author = User.query.get(s.user_id).username
+        story_list.append({"id": s.id, "title": s.title, "body": s.body, "author": author,
+                           "created_at": s.created_at.strftime('%Y-%m-%d %H:%M')})
     resources = [
-        {'name': 'National Suicide Prevention Lifeline', 'link': 'https://988lifeline.org/',
-         'description': 'Call 988 for 24/7 support'},
-        {'name': 'Crisis Text Line', 'link': 'https://www.crisistextline.org/', 'description': 'Text HOME to 741741'},
-        {'name': 'National Alliance on Mental Illness', 'link': 'https://www.nami.org/',
-         'description': 'Resources and support'}
+        {"name": "US/Canada Crisis Line", "link": "tel:988"},
+        {"name": "UK Helpline", "link": "tel:111"}
     ]
-
-    return render_template('stitch_journaling_dashboard/peer_support_forum_1/code.html', stories=story_data,
-                           resources=resources)
+    return render_template('community.html', stories=story_list, resources=resources)
 
 
-@app.route('/settings', methods=['GET', 'POST'])
+@app.route('/new_story', methods=['GET', 'POST'])
 @login_required
-def settings():
-    """Settings page"""
+def new_story():
     if request.method == 'POST':
-        action = request.form.get('action')
-
-        if action == 'update_profile':
-            new_username = request.form.get('username')
-            if new_username and new_username != current_user.username:
-                if not User.query.filter_by(username=new_username).first():
-                    current_user.username = new_username
-                    db.session.commit()
-
-        elif action == 'upload_avatar':
-            if 'avatar' in request.files:
-                file = request.files['avatar']
-                if file and file.filename:
-                    filename = secure_filename(file.filename)
-                    file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                    current_user.avatar = filename
-                    db.session.commit()
-
-        elif action == 'update_preferences':
-            # Example: privacy and notifications
-            privacy = request.form.get('privacy', 'public')
-            notifications = request.form.get('notifications', 'on')
-            prefs = json.loads(current_user.preferences)
-            prefs['privacy'] = privacy
-            prefs['notifications'] = notifications
-            current_user.preferences = json.dumps(prefs)
-            db.session.commit()
-
-    chat_history = ChatMessage.query.filter_by(user_id=current_user.id).order_by(ChatMessage.timestamp).all()
-    preferences = json.loads(current_user.preferences)
-
-    return render_template('stitch_journaling_dashboard/account_settings_screen_2/code.html',
-                           user=current_user, chat_history=chat_history, preferences=preferences)
+        title = request.form['title']
+        body = request.form['body']
+        anonymous = request.form.get('anonymous') == 'on'
+        story = Story(title=title, body=body, anonymous=anonymous)
+        if not anonymous:
+            story.user_id = current_user.id
+        db.session.add(story)
+        db.session.commit()
+        return redirect(url_for('community'))
+    return render_template('new_story.html')
 
 
-@app.route('/export')
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
-def export():
-    """Data export/download option"""
-    output = []
-    output.append(['Type', 'Date/Time', 'Details'])
+def profile():
+    if request.method == 'POST':
+        if 'username' in request.form:
+            if User.query.filter(User.username == request.form['username'], User.id != current_user.id).first():
+                return render_template('profile.html', error='Username taken')
+            current_user.username = request.form['username']
+        if 'preferences' in request.form:
+            current_user.preferences = request.form['preferences']
+        if 'avatar' in request.files:
+            file = request.files['avatar']
+            if file and file.filename:
+                filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                current_user.avatar = filename
+        # Privacy/notifications: placeholder, store in preferences
+        db.session.commit()
+        return redirect(url_for('profile'))
+    chat = ChatHistory.query.filter_by(user_id=current_user.id).first()
+    history = json.loads(chat.history) if chat else []
+    metrics = json.loads(current_user.metrics) if current_user.metrics else {}
+    return render_template('profile.html', user=current_user, history=history, metrics=metrics)
 
-    # Moods
-    moods = Mood.query.filter_by(user_id=current_user.id).order_by(Mood.date).all()
-    for mood in moods:
-        output.append(['Mood', mood.date.strftime('%Y-%m-%d'), str(mood.mood)])
 
-    # Chat history
-    chats = ChatMessage.query.filter_by(user_id=current_user.id).order_by(ChatMessage.timestamp).all()
-    for chat in chats:
-        sender = 'User' if chat.is_user else 'AI'
-        output.append(['Chat', chat.timestamp.strftime('%Y-%m-%d %H:%M:%S'), f"{sender}: {chat.message}"])
+@app.route('/avatars/<filename>')
+def avatars(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-    # Stories (only user's own)
-    stories = Story.query.filter_by(user_id=current_user.id).all()
-    for story in stories:
-        output.append(['Story', '', f"Title: {story.title}, Body: {story.body}, Anonymous: {story.anonymous}"])
 
-    si = '\n'.join(','.join(map(str, row)) for row in output)
-    response = make_response(si)
-    response.headers["Content-Disposition"] = "attachment; filename=user_data_export.csv"
-    response.headers["Content-type"] = "text/csv"
+@app.route('/export_data')
+@login_required
+def export_data():
+    chat = ChatHistory.query.filter_by(user_id=current_user.id).first()
+    history = json.loads(chat.history) if chat else []
+    metrics = json.loads(current_user.metrics) if current_user.metrics else {}
+    moods = MoodLog.query.filter_by(user_id=current_user.id).all()
+    mood_data = [{"date": str(m.date), "score": m.mood_score, "note": m.note} for m in moods]
+    data = {
+        "history": history,
+        "metrics": metrics,
+        "moods": mood_data
+    }
+    response = jsonify(data)
+    response.headers['Content-Disposition'] = 'attachment; filename=data.json'
     return response
 
 
-# Dynamic routes for all other screens
-for html_file in html_files:
-    route_name = html_file['route_name']
-    file_path = html_file['file_path']
-
-    # Skip the ones we already defined above
-    if route_name in ['journaling_dashboard_4', 'login_signup_screen_1', 'ai_companion_chat_screen_1',
-                      'peer_support_forum_1', 'account_settings_screen_2']:
-        continue
-
-
-    # Create route function dynamically
-    def make_route_handler(file_path):
-        def route_handler():
-            template_path = file_path.replace(
-                os.path.join(os.path.dirname(__file__), 'stitch_journaling_dashboard') + os.sep,
-                'stitch_journaling_dashboard/')
-            return render_template(template_path)
-
-        return route_handler
-
-
-    # Add the route with login required
-    app.add_url_rule(f'/{route_name}', route_name, login_required(make_route_handler(file_path)))
-
-
-# Navigation helper routes
-@app.route('/navigate/<screen_name>')
-def navigate(screen_name):
-    """Navigate to any screen by name"""
-    for html_file in html_files:
-        if html_file['route_name'] == screen_name:
-            return redirect(url_for(html_file['route_name']))
-    return redirect(url_for('index'))
-
-
-with app.app_context():
-    db.create_all()
-
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5500)
+    app.run(debug=True, port=5500)
