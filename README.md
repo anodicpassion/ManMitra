@@ -1,33 +1,78 @@
+# ManMitra - Mental Wellness Journaling Dashboard
 
-# MannMitra: Your Confidential AI Wellness Companion 🫂
+A Flask web application that connects all the HTML screens from the stitch_journaling_dashboard folder with simple navigation routes.
 
-MannMitra is a culturally aware, AI-powered platform designed to provide empathetic, stigma-free, and confidential mental wellness support to Indian youth. Leveraging Google Cloud's Generative AI, MannMitra bridges the gap between casual self-help and professional care, offering a safe space for young individuals to navigate mental health challenges.
+## Features
 
-## ✨ **Vision**
+- **Simple Navigation**: All HTML screens are accessible through Flask routes
+- **Main Screens**: Dashboard, AI Chat, Peer Support, Login, Settings
+- **Complete Screen Library**: Access to all 50+ screens in the dashboard
+- **Responsive Design**: Mobile-friendly interface with Tailwind CSS
 
-To empower Indian youth by normalizing mental health conversations and providing accessible, always-available first-line support. MannMitra aims to reduce the barriers of stigma and cost, offering a confidential companion and connecting urgent cases to real professionals.
+## Installation
 
-## 💻 **Core Features**
+1. Install Python dependencies:
+```bash
+pip install -r requirements.txt
+```
 
-* **24×7 Confidential AI Chat Companion:** An empathetic and culturally contextual AI built on **Google Cloud's Generative AI models**. It provides a judgment-free space for users to vent, and uses emotion recognition to adapt its tone.
-* **Personalized Wellness Journeys:** Generates daily wellness nudges and creates custom coping toolkits based on individual stress patterns.
-* **Anonymous Peer-Support Circles:** AI-moderated forums that ensure safe, supportive, and anonymous group discussions.
-* **Early Intervention & Escalation:** The AI detects red-flag signals and discreetly nudges users toward professional hotlines or nearby counselors.
-* **Cultural Sensitivity & Language Diversity:** Supports multiple Indian languages and uses culturally relevant idioms to increase relatability.
-* **Privacy by Design:** User data is encrypted and personal data is not stored beyond consented journaling, with anonymous logins available to overcome stigma.
+## Running the Application
 
-## 🚀 **Technology**
+1. Start the Flask development server:
+```bash
+python app.py
+```
 
-This project is built using the Google Cloud ecosystem for a scalable and robust solution.
+2. Open your browser and navigate to:
+```
+http://localhost:5000
+```
 
-* **Generative AI:** Vertex AI, PaLM 2 / Gemini
-* **Conversational AI:** Dialogflow CX
-* **Multi-language Support:** Cloud Translation API
-* **Data Analytics:** BigQuery + Looker
-* **Crisis Escalation:** Contact Center AI + Cloud Functions
-* **Mobile App Delivery:** Firebase
+## Available Routes
 
-## **License**
+### Main Navigation
+- `/` - Home page with navigation to all screens
+- `/dashboard` - Main journaling dashboard
+- `/ai-chat` - AI companion chat interface
+- `/peer-support` - Peer support forum
+- `/login` - Login/signup screen
+- `/settings` - Account settings
 
-This project is licensed under the **Apache License 2.0**. For more details, see the `LICENSE` file.
+### All Other Screens
+All other screens are automatically available at `/{screen_name}` where screen_name is derived from the folder name.
 
+Examples:
+- `/about_us_screen_1`
+- `/achievements_and_badges_screen_1`
+- `/crisis_support_screen_2`
+- `/mood_analytics_screen_1`
+
+## Project Structure
+
+```
+ManMitra/
+├── app.py                          # Main Flask application
+├── requirements.txt                # Python dependencies
+├── templates/                      # HTML templates
+│   ├── index.html                 # Navigation home page
+│   └── stitch_journaling_dashboard/ # All screen HTML files
+└── README.md                      # This file
+```
+
+## Navigation
+
+The application includes bottom navigation bars in most screens that allow easy movement between:
+- AI Chat
+- Journal Dashboard
+- Peer Support
+- Settings
+
+## Development
+
+The Flask app automatically discovers all HTML files in the `stitch_journaling_dashboard` directory and creates routes for them. To add new screens, simply add HTML files to the appropriate folder structure.
+
+## Notes
+
+- This is a simple navigation demo without backend functionality
+- No authentication or data persistence is implemented
+- All screens are accessible for demonstration purposes

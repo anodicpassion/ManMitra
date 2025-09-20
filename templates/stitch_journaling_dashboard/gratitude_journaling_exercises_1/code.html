@@ -1,0 +1,99 @@
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #137fec;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111418]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
+<div class="flex flex-col gap-4 p-4">
+<header class="flex items-center justify-between">
+<button class="text-white">
+<span class="material-symbols-outlined"> arrow_back_ios_new </span>
+</button>
+<h2 class="flex-1 text-center text-lg font-bold text-white">Gratitude Journal</h2>
+<div class="w-8"></div>
+</header>
+<div class="flex flex-col items-center gap-8 pt-8">
+<div class="flex flex-col items-center gap-2 text-center">
+<h1 class="text-3xl font-bold text-white">What are you grateful for?</h1>
+<p class="text-base text-slate-400">Take a moment to reflect and write it down.</p>
+</div>
+<div class="relative w-full">
+<textarea class="w-full resize-none rounded-xl border-2 border-slate-700 bg-slate-800 p-4 text-base text-white placeholder-slate-500 focus:border-[var(--primary-color)] focus:outline-none" placeholder="Write down at least three things you're grateful for today..." rows="6"></textarea>
+</div>
+<div class="w-full space-y-4">
+<div class="flex items-center justify-between rounded-lg bg-slate-800 p-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400"> share </span>
+<span class="font-medium text-white">Share this entry</span>
+</div>
+<button aria-checked="false" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-slate-600 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)] focus:ring-offset-2 focus:ring-offset-slate-800" data-headlessui-state="" id="headlessui-switch-:r0:" role="switch" tabindex="0" type="button">
+<span class="pointer-events-none inline-block h-5 w-5 translate-x-0 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out"></span>
+</button>
+</div>
+<div class="hidden w-full space-y-3 rounded-lg bg-slate-800 p-4">
+<div class="flex items-center justify-between">
+<label class="font-medium text-white" for="share-anonymously">Share Anonymously</label>
+<input checked="" class="h-5 w-5 rounded border-slate-600 bg-slate-700 text-[var(--primary-color)] focus:ring-[var(--primary-color)] focus:ring-offset-slate-800" id="share-anonymously" name="share-option" type="radio"/>
+</div>
+<div class="flex items-center justify-between">
+<label class="font-medium text-white" for="share-friends">Share with Friends</label>
+<input class="h-5 w-5 rounded border-slate-600 bg-slate-700 text-[var(--primary-color)] focus:ring-[var(--primary-color)] focus:ring-offset-slate-800" id="share-friends" name="share-option" type="radio"/>
+</div>
+</div>
+</div>
+<div class="w-full space-y-2">
+<div class="flex items-center justify-between">
+<p class="text-sm font-medium text-white">Your Gratitude Jar</p>
+<p class="text-sm font-medium text-slate-400">1/3 Filled</p>
+</div>
+<div class="h-2.5 w-full rounded-full bg-slate-700">
+<div class="h-2.5 rounded-full bg-[var(--primary-color)]" style="width: 33%"></div>
+</div>
+</div>
+<button class="flex w-full items-center justify-center rounded-full bg-[var(--primary-color)] py-3.5 text-base font-bold text-white shadow-lg shadow-blue-500/30 transition-transform duration-200 ease-in-out active:scale-95">
+            Add to Jar
+          </button>
+</div>
+</div>
+<footer class="sticky bottom-0 border-t border-slate-800 bg-[#1c2127] pb-4 pt-2">
+<nav class="flex justify-around">
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined"> forum </span>
+<span class="text-xs font-medium">AI Chat</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-[var(--primary-color)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;"> book_2 </span>
+<span class="text-xs font-medium">Journal</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined"> group </span>
+<span class="text-xs font-medium">Peer Support</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-400" href="#">
+<span class="material-symbols-outlined"> settings </span>
+<span class="text-xs font-medium">Settings</span>
+</a>
+</nav>
+</footer>
+</div>
+</body></html>

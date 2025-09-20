@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+        :root {
+            --primary-color: #13a4ec;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-[#111618] dark justify-between group/design-root" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="flex-grow p-6 pb-24">
+<div class="flex items-center justify-between mb-8">
+<button class="text-white">
+<span class="material-symbols-outlined text-3xl"> close </span>
+</button>
+<h1 class="text-white text-xl font-bold">Crisis Support</h1>
+<div class="w-8"></div>
+</div>
+<div class="text-center mb-10">
+<div class="flex justify-center items-center mb-4">
+<span class="material-symbols-outlined text-5xl text-[var(--primary-color)]">
+                        security
+                    </span>
+</div>
+<h2 class="text-white text-3xl font-bold leading-tight mb-3">Alert a Trusted Contact</h2>
+<p class="text-gray-400 text-base leading-relaxed max-w-sm mx-auto">
+                    Quickly and securely let someone you trust know you need help. Your privacy is our priority.
+                </p>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="text-white text-lg font-semibold mb-3">Who to Alert?</h3>
+<div class="bg-[#283339] rounded-lg p-4 flex items-center space-x-4">
+<img alt="Trusted Contact" class="w-12 h-12 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBue56bWIY2qZlvHAiB4fAPyfCJvY_f8Rl7BHRAmNi-DZZtKc4o_HX6-6aaYkriRl7Cox3rReSsA4KUyqfhlZOA47JzNZ4fOo33tygOCQiNN19-Nd_AzGKtRB4S5aon32WEObT2jDy777A_TutpC5OiljMZNx2lxDqO6f07sihMCO16N0rEvdvqoUdDoMEVAp8ZoY81XiEo_PXKTn_p088K3f77fzEuM-vv95_6hiAnG1NM2BvefdFsXDSaBZcIVfVINNJUvXWvgIPg"/>
+<div>
+<h4 class="text-white font-semibold">Alex Rivera</h4>
+<p class="text-gray-400 text-sm">Parent</p>
+</div>
+<div class="ml-auto text-[var(--primary-color)]">
+<button class="text-sm font-semibold">Change</button>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-white text-lg font-semibold mb-3">Customize Your Message</h3>
+<div class="bg-[#283339] rounded-lg p-4">
+<p class="text-gray-300 text-base mb-4">"I'm having a tough time and could use your support right now. Please check in with me when you can."</p>
+<button class="w-full flex items-center justify-center text-white text-sm font-semibold py-2">
+<span class="material-symbols-outlined mr-2">edit</span>
+<span>Edit Message</span>
+</button>
+</div>
+</div>
+<div>
+<h3 class="text-white text-lg font-semibold mb-3">Include Location (Optional)</h3>
+<div class="bg-[#283339] rounded-lg p-4 space-y-3">
+<div class="flex items-center justify-between">
+<label class="flex items-center space-x-3 cursor-pointer" for="location-toggle">
+<span class="material-symbols-outlined text-white">location_on</span>
+<span class="text-white font-medium">Share my current location</span>
+</label>
+<div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+<input class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" id="location-toggle" name="location-toggle" type="checkbox"/>
+<label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-600 cursor-pointer" for="location-toggle"></label>
+</div>
+</div>
+<p class="text-gray-400 text-xs leading-normal">
+                            If you choose to share your location, it will be sent as a one-time snapshot with this alert to help your contact find you. We value your privacy and won't track you.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<div class="sticky bottom-0 bg-[#111618] py-4 px-6 border-t border-gray-800">
+<div class="flex flex-col space-y-3">
+<button class="w-full cursor-pointer items-center justify-center rounded-xl h-12 px-4 bg-[var(--primary-color)] text-white text-base font-bold flex">
+<span class="material-symbols-outlined mr-2">send</span>
+                    Send Alert Now
+                </button>
+<button class="w-full cursor-pointer items-center justify-center rounded-xl h-12 px-4 bg-[#283339] text-white text-base font-bold">
+                    Cancel
+                </button>
+</div>
+</div>
+</div>
+<style>
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--primary-color);
+            background-color: var(--primary-color);
+        }
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #4ed1a3;
+        }
+        .toggle-checkbox:checked {
+            transform: translateX(100%);
+            border-color: var(--primary-color);
+        }
+        .toggle-label {
+            transition: background-color 0.2s ease-in-out;
+        }
+        .toggle-checkbox {
+            transition: transform 0.2s ease-in-out;
+        }
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: var(--primary-color);
+        }
+    </style>
+
+</body></html>

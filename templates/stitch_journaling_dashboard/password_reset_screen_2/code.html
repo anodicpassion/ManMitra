@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password</title>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #13a4ec;
+      --background-color: #111827;
+      --input-bg-color: #1F2937;
+      --text-color: #F9FAFB;
+      --placeholder-color: #9CA3AF;
+    }
+    body {
+      font-family: 'Manrope', sans-serif;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[var(--background-color)] text-[var(--text-color)]">
+<div class="flex flex-col h-screen justify-between p-6">
+<div class="flex-grow">
+<header class="flex items-center justify-start mb-10">
+<button class="p-2 -ml-2">
+<span class="material-symbols-outlined text-3xl">
+            arrow_back_ios_new
+          </span>
+</button>
+<h1 class="text-xl font-bold text-center flex-1 -ml-8">Reset Password</h1>
+</header>
+<main class="flex flex-col gap-8">
+<div>
+<h2 class="text-3xl font-bold mb-2">Forgot your password?</h2>
+<p class="text-base text-gray-400">
+            No worries! Enter your email or phone number and we'll send you a verification code to reset it.
+          </p>
+</div>
+<div class="relative">
+<input class="form-input w-full bg-[var(--input-bg-color)] border-none rounded-xl h-16 pl-6 pr-14 text-lg placeholder-[var(--placeholder-color)] focus:ring-2 focus:ring-[var(--primary-color)] transition-all duration-300" placeholder="Email or Phone Number" type="text"/>
+<span class="material-symbols-outlined absolute right-5 top-1/2 -translate-y-1/2 text-gray-400">
+            alternate_email
+          </span>
+</div>
+</main>
+</div>
+<div class="flex flex-col gap-4">
+<button class="w-full bg-[var(--primary-color)] text-white text-lg font-bold py-4 rounded-full hover:bg-opacity-90 transition-colors duration-300">
+        Send Code
+      </button>
+<div class="w-full flex justify-center mt-4">
+<div class="bg-gray-700 h-1.5 w-32 rounded-full"></div>
+</div>
+</div>
+</div>
+
+</body></html>

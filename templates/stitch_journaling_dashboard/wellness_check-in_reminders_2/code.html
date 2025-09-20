@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Inter%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+      :root {
+        --primary-color: #13a4ec;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between group/design-root overflow-x-hidden font-inter text-white">
+<div class="flex flex-col">
+<header class="flex items-center p-4">
+<button class="p-2">
+<span class="material-symbols-outlined text-white" style="font-size: 24px">arrow_back_ios_new</span>
+</button>
+<h1 class="flex-1 text-center text-xl font-bold tracking-tight pr-8">
+          Wellness Check-in
+        </h1>
+</header>
+<main class="flex flex-col gap-8 p-4">
+<section>
+<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">
+            Schedule
+          </h2>
+<div class="flex items-center justify-between rounded-xl bg-[#1E293B] p-4">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#334155]">
+<span class="material-symbols-outlined text-white" style="font-size: 24px">notifications</span>
+</div>
+<div>
+<p class="text-base font-medium">Daily Check-In</p>
+<p class="text-sm text-[#9db0b9]">Every day at 7:00 PM</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full bg-[#334155] p-0.5 has-[:checked]:justify-end has-[:checked]:bg-[var(--primary-color)]">
+<div class="h-full w-[27px] transform rounded-full bg-white shadow-lg transition-transform"></div>
+<input checked="" class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+</section>
+<section>
+<h2 class="text-[22px] font-bold leading-tight tracking-[-0.015em] mb-4">
+            Customize
+          </h2>
+<div class="flex flex-col gap-6">
+<div>
+<label class="mb-2 block text-base font-medium" for="reminder-message">Reminder Message</label>
+<input class="form-input w-full rounded-xl border-none bg-[#1E293B] p-4 text-base placeholder:text-[#9db0b9] focus:ring-2 focus:ring-inset focus:ring-[var(--primary-color)]" id="reminder-message" type="text" value="How are you feeling right now?"/>
+</div>
+<div class="flex items-center justify-between rounded-xl bg-[#1E293B] p-4">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#334155]">
+<span class="material-symbols-outlined text-white" style="font-size: 24px">psychology</span>
+</div>
+<div>
+<p class="text-base font-medium">AI Companion Check-in</p>
+<p class="text-sm text-[#9db0b9]">Personalized prompts</p>
+</div>
+</div>
+<label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full bg-[#334155] p-0.5 has-[:checked]:justify-end has-[:checked]:bg-[var(--primary-color)]">
+<div class="h-full w-[27px] transform rounded-full bg-white shadow-lg transition-transform"></div>
+<input class="invisible absolute" type="checkbox"/>
+</label>
+</div>
+<div>
+<label class="mb-2 block text-base font-medium" for="time">Time</label>
+<input class="form-input w-full rounded-xl border-none bg-[#1E293B] p-4 text-base placeholder:text-[#9db0b9] focus:ring-2 focus:ring-inset focus:ring-[var(--primary-color)]" id="time" type="time" value="19:00"/>
+</div>
+<div>
+<label class="mb-2 block text-base font-medium" for="frequency">Frequency</label>
+<div class="relative w-full rounded-xl border-none bg-[#1E293B] focus-within:ring-2 focus-within:ring-inset focus-within:ring-[var(--primary-color)]">
+<select class="form-select w-full appearance-none border-none bg-transparent p-4 text-base placeholder:text-[#9db0b9] focus:outline-none focus:ring-0" id="frequency">
+<option value="daily">Daily</option>
+<option value="weekdays">Weekdays</option>
+<option value="weekends">Weekends</option>
+<option value="custom">Custom</option>
+</select>
+<span class="material-symbols-outlined pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#9db0b9]">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<footer class="p-4">
+<button class="flex h-14 w-full cursor-pointer items-center justify-center rounded-xl bg-[var(--primary-color)] text-base font-bold tracking-wide text-white transition-colors hover:bg-opacity-90">
+        Save Changes
+      </button>
+</footer>
+</div>
+
+</body></html>

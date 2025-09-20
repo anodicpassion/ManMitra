@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Manrope%3Awght%40400%3B500%3B700%3B800&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<title>Stitch Design</title>
+<link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style type="text/tailwindcss">
+    :root {
+      --primary-color: #13a4ec;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#111618]">
+<div class="relative flex h-auto min-h-screen w-full flex-col justify-between overflow-x-hidden" style='font-family: Manrope, "Noto Sans", sans-serif;'>
+<div class="w-full">
+<header class="sticky top-0 z-10 flex items-center justify-between bg-[#111618]/80 p-4 backdrop-blur-sm">
+<button class="flex size-10 items-center justify-center rounded-full text-white">
+<span class="material-symbols-outlined"> arrow_back_ios_new </span>
+</button>
+<h1 class="text-lg font-bold text-white">Linked Accounts</h1>
+<div class="w-10"></div>
+</header>
+<main class="flex-1 px-4 pt-6 pb-8">
+<div class="mb-8">
+<h2 class="text-2xl font-bold text-white">Manage Your Connections</h2>
+<p class="mt-2 text-base text-gray-400">Connect or disconnect accounts to control data sharing and personalize your experience.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between rounded-2xl bg-[#1C2327] p-4">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#283339] text-[var(--primary-color)]">
+<span class="material-symbols-outlined text-3xl">favorite</span>
+</div>
+<div>
+<p class="text-base font-medium text-white">Health Tracking</p>
+<p class="text-sm text-gray-400">Not Connected</p>
+</div>
+</div>
+<button class="flex h-10 w-24 items-center justify-center rounded-full bg-[var(--primary-color)] text-sm font-bold text-white transition-colors hover:bg-[var(--primary-color)]/90">
+              Connect
+            </button>
+</div>
+<div class="flex items-center justify-between rounded-2xl bg-[#1C2327] p-4">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#283339] text-[var(--primary-color)]">
+<span class="material-symbols-outlined text-3xl">self_improvement</span>
+</div>
+<div>
+<p class="text-base font-medium text-white">Mindfulness App</p>
+<p class="text-sm text-gray-400">Not Connected</p>
+</div>
+</div>
+<button class="flex h-10 w-24 items-center justify-center rounded-full bg-[var(--primary-color)] text-sm font-bold text-white transition-colors hover:bg-[var(--primary-color)]/90">
+              Connect
+            </button>
+</div>
+<div class="flex flex-col rounded-2xl bg-[#1C2327] p-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-[#283339] text-[var(--primary-color)]">
+<span class="material-symbols-outlined text-3xl">bedtime</span>
+</div>
+<div>
+<p class="text-base font-medium text-white">Sleep Tracking</p>
+<p class="text-sm text-green-400">Connected</p>
+</div>
+</div>
+<button class="flex h-10 items-center justify-center rounded-full bg-red-500/20 px-6 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/30">
+                Revoke
+              </button>
+</div>
+<div class="mt-4 border-t border-gray-700 pt-4">
+<p class="text-sm text-gray-400">Revoking access will stop the app from syncing new sleep data. Previously synced data will be retained unless you choose to delete it from your app settings.</p>
+<button class="mt-2 text-sm font-semibold text-[var(--primary-color)]">
+                Learn more about data management
+              </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<div x-data="{ open: false }">
+<footer class="sticky bottom-0 border-t border-[#283339] bg-[#1c2327]/80 backdrop-blur-sm">
+<nav class="flex items-center justify-around p-2">
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<p class="text-xs font-medium">AI Chat</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined">book</span>
+<p class="text-xs font-medium">Journal</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-gray-400" href="#">
+<span class="material-symbols-outlined">group</span>
+<p class="text-xs font-medium">Peer Support</p>
+</a>
+<a class="flex flex-1 flex-col items-center justify-end gap-1 text-[var(--primary-color)]" href="#">
+<div class="rounded-full bg-[var(--primary-color)]/20 p-2">
+<span class="material-symbols-outlined">settings</span>
+</div>
+<p class="text-xs font-medium text-white">Settings</p>
+</a>
+</nav>
+<div class="h-safe-area-bottom bg-[#1c2327]/80"></div>
+</footer>
+<div class="fixed inset-0 z-50 flex items-end justify-center bg-black/50" x-cloak="" x-show="open">
+<div @click.away="open = false" class="w-full max-w-md rounded-t-3xl bg-[#1C2327] p-6 text-white shadow-lg">
+<div class="flex flex-col items-center text-center">
+<div class="mb-4 flex size-14 items-center justify-center rounded-full bg-red-500/20 text-red-400">
+<span class="material-symbols-outlined text-4xl">
+                warning
+              </span>
+</div>
+<h2 class="text-xl font-bold">Revoke Access?</h2>
+<p class="mt-2 text-gray-400">
+              Are you sure you want to disconnect your Sleep Tracking account? New data will no longer be synced.
+            </p>
+</div>
+<div class="mt-8 space-y-3">
+<button @click="open = false" class="w-full rounded-full bg-red-600 py-3.5 text-base font-bold text-white transition-colors hover:bg-red-700">
+              Yes, Revoke
+            </button>
+<button @click="open = false" class="w-full rounded-full bg-[#283339] py-3.5 text-base font-medium text-white transition-colors hover:bg-[#3A454C]">
+              Cancel
+            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script defer="" src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</body></html>
