@@ -200,7 +200,14 @@ def logout():
     return redirect(url_for('login'))
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
+def home():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    return render_template('index.html')
+
+
+@app.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
     hour = datetime.datetime.now().hour
@@ -258,7 +265,7 @@ def chat():
     history.append({"role": "user", "parts": [user_message]})
     conversation_str = "\n".join([f"{msg['role'].title()}: {msg['parts'][0]}" for msg in history])
     therapist_reply = get_chat_response(conversation_str)
-    history.append({"role": "model", "parts": [therapist_reply]})
+    history.append({"role": "ManMitra", "parts": [therapist_reply]})
     chat.history = json.dumps(history)
     db.session.commit()
     metrics = analyze_conversation(conversation_str)
@@ -322,7 +329,6 @@ def profile():
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 current_user.avatar = filename
-        # Privacy/notifications: placeholder, store in preferences
         db.session.commit()
         return redirect(url_for('profile'))
     chat = ChatHistory.query.filter_by(user_id=current_user.id).first()

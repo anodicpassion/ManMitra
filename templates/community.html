@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@300;400;600;700;900&family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Community</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #137fec;
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+        #story-modal {
+            display: none;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(4px);
+        }
+        .story-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#0d1117] text-white dark justify-between group/design-root overflow-x-hidden">
+        <div class="flex-grow">
+            <header class="flex items-center p-4 justify-between sticky top-0 bg-[#0d1117]/80 backdrop-blur-sm z-10">
+                <a href="{{ url_for('dashboard') }}" class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                </a>
+                <h2 class="text-xl font-semibold tracking-tight">Community</h2>
+                <div class="size-10"></div>
+            </header>
+            <main class="flex flex-col gap-8 px-6 pb-8 pt-6 text-white max-w-2xl mx-auto">
+                <div class="w-full">
+                    <h3 class="text-lg font-semibold tracking-tight mb-4">Peer Stories</h3>
+                    {% for story in stories %}
+                        <div class="bg-white/5 rounded-xl p-4 mb-4 shadow-lg shadow-black/20 cursor-pointer story-item"
+                             data-title="{{ story.title | e }}"
+                             data-author="{{ story.author | e }}"
+                             data-date="{{ story.created_at | e }}"
+                             data-body="{{ story.body | e }}">
+                            <h4 class="text-base font-semibold text-[var(--primary-color)]">{{ story.title }} by {{ story.author }}</h4>
+                            <p class="text-sm text-gray-400 mt-1"><em>{{ story.created_at }}</em></p>
+                            <p class="text-gray-300 mt-2 story-preview">{{ story.body | truncate(100, true, '') }}</p>
+                        </div>
+                    {% else %}
+                        <p class="text-gray-300 text-base">No stories yet. Be the first to share!</p>
+                    {% endfor %}
+                    <a href="{{ url_for('new_story') }}" class="inline-block bg-[var(--primary-color)] text-white rounded-md px-4 py-2 mt-2 hover:bg-[var(--primary-color)]/80 transition-colors">Share Your Story</a>
+                </div>
+                <div class="w-full">
+                    <h3 class="text-lg font-semibold tracking-tight mb-4">Indian Helplines</h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="tel:18005990019" class="text-[var(--primary-color)] hover:underline">
+                                KIRAN Mental Health Helpline: 1800-599-0019
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:9152987821" class="text-[var(--primary-color)] hover:underline">
+                                Vandrevala Foundation Helpline: 9152987821
+                            </a>
+                        </li>
+                        <li>
+                            <a href="tel:1800120820050" class="text-[var(--primary-color)] hover:underline">
+                                Snehi Helpline: 1800-120-820050
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </main>
+
+            <br>
+            <br>
+
+            <br>
+        </div>
+        <div id="story-modal" class="fixed inset-0 flex items-center justify-center z-20">
+            <div class="bg-[#0d1117] rounded-xl p-6 max-w-lg w-full mx-4 max-h-[80vh] overflow-y-auto shadow-lg shadow-black/50">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="modal-title" class="text-lg font-semibold text-[var(--primary-color)]"></h3>
+                    <button onclick="closeStoryModal()" class="text-gray-400 hover:text-white">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+                <p id="modal-author" class="text-sm text-gray-400"></p>
+                <p id="modal-date" class="text-sm text-gray-400 mb-4"></p>
+                <p id="modal-body" class="text-gray-300"></p>
+            </div>
+        </div>
+        <footer class="fixed bottom-0 w-full bg-[#0d1117]/80 backdrop-blur-sm z-10">
+            <div class="flex items-center justify-around border-t border-white/10 p-2">
+
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="/">
+                    <span class="material-symbols-outlined">spa</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('chat_page') }}">
+                    <span class="material-symbols-outlined">auto_stories</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-[var(--primary-color)]" href="{{ url_for('community') }}">
+                    <span class="material-symbols-outlined">groups</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('profile') }}">
+                    <span class="material-symbols-outlined">person</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const storyItems = document.querySelectorAll('.story-item');
+            storyItems.forEach(function(item) {
+                item.addEventListener('click', function() {
+                    const title = this.dataset.title;
+                    const author = this.dataset.author;
+                    const date = this.dataset.date;
+                    const body = this.dataset.body;
+                    document.getElementById('modal-title').textContent = title;
+                    document.getElementById('modal-author').textContent = `By ${author}`;
+                    document.getElementById('modal-date').textContent = date;
+                    document.getElementById('modal-body').textContent = body;
+                    document.getElementById('story-modal').style.display = 'flex';
+                });
+            });
+        });
+
+        function closeStoryModal() {
+            document.getElementById('story-modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
