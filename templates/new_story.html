@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@300;400;600;700;900&family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Share Your Story</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #137fec;
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#0d1117] text-white dark justify-between group/design-root overflow-x-hidden">
+        <div class="flex-grow">
+            <header class="flex items-center p-4 justify-between sticky top-0 bg-[#0d1117]/80 backdrop-blur-sm z-10">
+                <a href="{{ url_for('community') }}" class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                </a>
+                <h2 class="text-xl font-semibold tracking-tight">Share Your Story</h2>
+                <div class="size-10"></div>
+            </header>
+            <main class="flex flex-col gap-8 px-6 pb-8 pt-6 text-white max-w-2xl mx-auto">
+                <div class="w-full bg-white/5 rounded-xl p-6 shadow-lg shadow-black/20">
+                    <h3 class="text-lg font-semibold tracking-tight mb-6">Share your experience</h3>
+                    <form method="post" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" for="title">Title</label>
+                            <input class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3" name="title" type="text" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" for="body">Story</label>
+                            <textarea class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3 h-48 resize-none" name="body" required></textarea>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" name="anonymous" id="anonymous" class="rounded border-white/20 text-[var(--primary-color)] focus:ring-[var(--primary-color)]">
+                            <label class="text-sm font-medium text-gray-300" for="anonymous">Post Anonymously</label>
+                        </div>
+                        <input type="submit" value="Share Story" class="w-full bg-[var(--primary-color)] text-white rounded-md p-3 hover:bg-[var(--primary-color)]/80 transition-colors font-semibold">
+                    </form>
+                </div>
+            </main>
+        </div>
+        <footer class="fixed bottom-0 w-full bg-[#0d1117]/80 backdrop-blur-sm z-10">
+            <div class="flex items-center justify-around border-t border-white/10 p-2">
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="/">
+                    <span class="material-symbols-outlined">spa</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('chat_page') }}">
+                    <span class="material-symbols-outlined">auto_stories</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-[var(--primary-color)]" href="{{ url_for('community') }}">
+                    <span class="material-symbols-outlined">groups</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('profile') }}">
+                    <span class="material-symbols-outlined">person</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

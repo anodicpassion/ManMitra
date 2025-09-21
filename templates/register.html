@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@300;400;600;700;900&family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Register</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #137fec;
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#0d1117] text-white dark justify-center items-center group/design-root overflow-x-hidden">
+        <main class="flex flex-col gap-6 px-6 py-8 text-white max-w-md w-full">
+            <h2 class="text-xl font-semibold tracking-tight text-center">Register</h2>
+            <div class="w-full bg-white/5 rounded-xl p-6 shadow-lg shadow-black/20">
+                <form method="post" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5" for="username">Username</label>
+                        <input class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3" name="username" type="text" id="username" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-300 mb-1.5" for="password">Password</label>
+                        <input class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3" name="password" type="password" id="password" required>
+                    </div>
+                    <input type="submit" value="Register" class="w-full bg-[var(--primary-color)] text-white rounded-md p-3 font-semibold hover:bg-[var(--primary-color)]/80 transition-colors">
+                </form>
+                {% if error %}
+                    <p class="text-red-400 text-sm mt-4 text-center">{{ error }}</p>
+                {% endif %}
+                <p class="text-gray-300 text-sm mt-4 text-center">
+                    Already have an account? <a href="{{ url_for('login') }}" class="text-[var(--primary-color)] hover:underline">Login</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

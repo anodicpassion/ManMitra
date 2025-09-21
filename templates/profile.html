@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&family=Lexend:wght@300;400;600;700;900&family=Noto+Sans:wght@400;500;700;900" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <title>Profile</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style type="text/tailwindcss">
+        :root {
+            --primary-color: #137fec;
+        }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+        #profile-form, #chat-history {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <div class="relative flex h-auto min-h-screen w-full flex-col bg-[#0d1117] text-white dark justify-between group/design-root overflow-x-hidden">
+        <div class="flex-grow">
+            <header class="flex items-center p-4 justify-between sticky top-0 bg-[#0d1117]/80 backdrop-blur-sm z-10">
+                <a href="{{ url_for('dashboard') }}" class="flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-white/10 transition-colors">
+                    <span class="material-symbols-outlined text-2xl">arrow_back</span>
+                </a>
+                <h2 class="text-xl font-semibold tracking-tight">Profile</h2>
+                <div class="size-10"></div>
+            </header>
+            <main class="flex flex-col gap-8 px-6 pb-28 pt-6 text-white max-w-2xl mx-auto">
+                <!-- Profile Section -->
+                <div class="w-full bg-white/5 rounded-xl p-6 shadow-lg shadow-black/20">
+                    <div class="flex items-center gap-4 mb-4">
+                        <img src="{{ url_for('avatars', filename=current_user.avatar) }}" alt="Avatar" class="w-20 h-20 rounded-full object-cover">
+                        <div>
+                            <h3 class="text-lg font-semibold text-[var(--primary-color)]">{{ current_user.username }}</h3>
+                            {% if current_user.preferences %}
+                                <p class="text-gray-300 text-sm mt-1">{{ current_user.preferences }}</p>
+                            {% else %}
+                                <p class="text-gray-500 text-sm mt-1 italic">No bio added yet.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <button onclick="toggleForm()" class="bg-[var(--primary-color)] text-white rounded-md px-4 py-2 hover:bg-[var(--primary-color)]/80 transition-colors">Edit Profile</button>
+                    <form id="profile-form" method="post" enctype="multipart/form-data" class="space-y-4 mt-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" for="username">Username</label>
+                            <input class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3" name="username" type="text" id="username" value="{{ current_user.username }}" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" for="avatar">Avatar</label>
+                            <input class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3" type="file" name="avatar" id="avatar" accept="image/*">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1.5" for="preferences">Preferences (e.g., notifications, privacy)</label>
+                            <textarea class="w-full bg-white/10 border-white/20 rounded-md text-white focus:ring-[var(--primary-color)] focus:border-[var(--primary-color)] p-3 h-24" name="preferences" id="preferences">{{ current_user.preferences or '' }}</textarea>
+                        </div>
+                        <input type="submit" value="Update Profile" class="w-full bg-[var(--primary-color)] text-white rounded-md p-3 font-semibold hover:bg-[var(--primary-color)]/80 transition-colors">
+                    </form>
+                    {% if error %}
+                        <p class="text-red-400 text-sm mt-2">{{ error }}</p>
+                    {% endif %}
+                </div>
+                <!-- Chat History -->
+                <div class="w-full bg-white/5 rounded-xl p-6 shadow-lg shadow-black/20">
+                    <h3 class="text-lg font-semibold tracking-tight mb-4">Chat History</h3>
+                    <button onclick="toggleHistory()" class="bg-[var(--primary-color)] text-white rounded-md px-4 py-2 mb-4 hover:bg-[var(--primary-color)]/80 transition-colors">Model History</button>
+                    <div id="chat-history">
+                        {% for msg in history %}
+                            <div class="mb-3 last:mb-0">
+                                <p class="text-base {% if msg.role == 'user' %}text-right text-[var(--primary-color)]{% else %}text-left text-gray-300{% endif %}">
+                                    <strong>{{ msg.role | capitalize }}:</strong> {{ msg.parts[0] }}
+                                </p>
+                            </div>
+                        {% else %}
+                            <p class="text-gray-300 text-base">No chat history yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Latest Metrics -->
+                <div class="w-full bg-white/5 rounded-xl p-6 shadow-lg shadow-black/20">
+                    <h3 class="text-lg font-semibold tracking-tight mb-4">Latest Metrics</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-300 mb-2">Progress Engagement</h4>
+                            <p class="text-gray-300 text-sm">Sentiment Trend: getting worse</p>
+                            <p class="text-gray-300 text-sm">Emotional Variability: fluctuating</p>
+                            <p class="text-gray-300 text-sm">Goal Mentions: present</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-300 mb-2">Risk Safety</h4>
+                            <p class="text-gray-300 text-sm">Self-Harm Ideation: high</p>
+                            <p class="text-gray-300 text-sm">Hopelessness: high</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-300 mb-2">Well-Being Indicators</h4>
+                            <p class="text-gray-300 text-sm">Sleep Quality: mentioned</p>
+                            <p class="text-gray-300 text-sm">Energy Levels: low</p>
+                            <p class="text-gray-300 text-sm">Social Connection: connected</p>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-medium text-gray-300 mb-2">Linguistic Metrics</h4>
+                            <p class="text-gray-300 text-sm">Sentiment Polarity: negative</p>
+                            <p class="text-gray-300 text-sm">Dominant Emotion: sadness</p>
+                            <p class="text-gray-300 text-sm">Self-Focused Language: high</p>
+                            <p class="text-gray-300 text-sm">Absolutist Words: present</p>
+                        </div>
+                    </div>
+<!--                    <p class="text-gray-300 text-base mt-4">Overall Score: 1.83/3</p>-->
+                    <a href="{{ url_for('export_data') }}" class="inline-block bg-[var(--primary-color)] text-white rounded-md px-4 py-2 mt-4 hover:bg-[var(--primary-color)]/80 transition-colors">Download Data</a>
+                </div>
+                <!-- Logout Button -->
+                <div class="w-full">
+                    <a href="{{ url_for('logout') }}" class="block w-full text-center bg-red-600 text-white rounded-md px-4 py-3 mt-4 font-semibold hover:bg-red-700 transition-colors">
+                        Logout
+                    </a>
+                </div>
+            </main>
+        </div>
+        <footer class="fixed bottom-0 w-full bg-[#0d1117]/80 backdrop-blur-sm z-10">
+            <div class="flex items-center justify-around border-t border-white/10 p-2">
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="/">
+                    <span class="material-symbols-outlined">spa</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('chat_page') }}">
+                    <span class="material-symbols-outlined">auto_stories</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-gray-400 hover:text-white transition-colors" href="{{ url_for('community') }}">
+                    <span class="material-symbols-outlined">groups</span>
+                </a>
+                <a class="flex flex-col items-center justify-center gap-1.5 py-2 px-4 rounded-full text-[var(--primary-color)]" href="{{ url_for('profile') }}">
+                    <span class="material-symbols-outlined">person</span>
+                </a>
+            </div>
+        </footer>
+    </div>
+    <script>
+        function toggleForm() {
+            const form = document.getElementById('profile-form');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function toggleHistory() {
+            const history = document.getElementById('chat-history');
+            history.style.display = history.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
